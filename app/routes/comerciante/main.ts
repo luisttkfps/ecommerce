@@ -10,6 +10,12 @@ router.get('/comerciantes/:id', [MainComercianteController, 'index'])
 router.post('/comerciantes/auth', [AuthComercianteController, 'criar'])
 router.put('/comerciantes', [MainComercianteController, 'alterar'])
 router.delete('/comerciantes', [MainComercianteController, 'deletar'])
-router.delete('/comerciantes/auth', [AuthComercianteController, 'deletar']).use(middleware.auth({guards:['comerciante']}))
-router.put('/comerciantes/banner', [ComercianteImagesController, 'update']).use(middleware.auth({guards:['comerciante']}))
-
+router
+  .delete('/comerciantes/auth', [AuthComercianteController, 'deletar'])
+  .use(middleware.auth({ guards: ['comerciante'] }))
+router
+  .put('/comerciantes/banner', [ComercianteImagesController, 'updateBanner'])
+  .use(middleware.auth({ guards: ['comerciante'] }))
+router
+  .put('/comerciantes/logo', [ComercianteImagesController, 'updateLogo'])
+  .use(middleware.auth({ guards: ['comerciante'] }))
